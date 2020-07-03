@@ -1,4 +1,5 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TGLoaderService } from './service/tg-loader.service';
 import { TGHttpClient } from './service/tg-http-client.service';
@@ -9,6 +10,7 @@ import { TGError } from './model';
   declarations: [],
   imports: [
     HttpClientModule,
+    FormsModule,
   ],
   providers: [
     TGLoaderService,

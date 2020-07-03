@@ -1,16 +1,43 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, EventEmitter } from '@angular/core';
 
+/**
+ * Service Loader class
+ *
+ * It will fire events on first the request and last response
+ *
+ * ### onLoaderChange$ Event subscription
+ * ```
+ * @example
+ * onLoaderChange$.subscribe(res => {
+ *      if(res) {
+ *          // Show Loader
+ *      } else {
+ *          // Hide Loader
+ *      }
+ * });
+ * ```
+ * @export
+ * @class TGLoaderService
+ */
 @Injectable()
 export class TGLoaderService {
 
-    public onLoaderChange$: BehaviorSubject<boolean>;
+    /**
+     * Loader change event emitter
+     *
+     * @Type {EventEmitter<boolean>}
+     */
+    public onLoaderChange$: EventEmitter<boolean>;
     private serviceCallCount = 0;
 
     constructor() {
-        this.onLoaderChange$ = new BehaviorSubject(false);
+        this.onLoaderChange$ = new EventEmitter(false);
     }
 
+    /**
+     * Increasing service call count
+     * If serviceCallCount > 0, emitting onLoaderChange$.next(true)
+     */
     start() {
         this.serviceCallCount++;
         if (this.serviceCallCount > 0) {
@@ -18,6 +45,10 @@ export class TGLoaderService {
         }
     }
 
+    /**
+     * Decreasing service call count
+     * If serviceCallCount < 1, emitting onLoaderChange$.next(false)
+     */
     end() {
         if (this.serviceCallCount > 0) {
             this.serviceCallCount--;

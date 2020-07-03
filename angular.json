@@ -5,7 +5,7 @@
   "projects": {
     "@techgrains/core": {
       "projectType": "library",
-      "root": "projects/@techgrains/core",
+      "root": "projects/core",
       "sourceRoot": "projects/core/src",
       "prefix": "lib",
       "architect": {

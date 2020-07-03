@@ -1,15 +1,18 @@
 
 /**
- *  TGFramework's Session implementation
+ * TGFramework's Session implementation
+ *
+ * @export
+ * @class TGLocalStoarage
  */
 export class TGSession {
-    /// Singleton instance
+    /** Singleton instance */
     private static instance: TGSession = null;
 
-    /// Holds all key-values as Map
+    /** Holds all key-values as Map */
     private map;
 
-    /// Gets TGSession's instance reference
+    /** Gets TGSession's instance reference */
     public static getInstance(): TGSession {
         if (this.instance == null) {
             this.instance = new TGSession();
@@ -17,27 +20,48 @@ export class TGSession {
         return this.instance;
     }
 
-    /// Private constructor
+    /** Private constructor */
     private constructor() {
         this.map = new Map<string, object>();
     }
 
-    /// Sets value for given key
+    /**
+     * Sets value for given key
+     *
+     * @param {string} key
+     * @param {*} value
+     */
     set(key: string, value: any): void {
         this.map[key] = value;
     }
 
-    /// Gets value for given key
+    /**
+     * Gets value for given key
+     *
+     * @param {string} key
+     * @returns {*}
+     * @memberof TGSession
+     */
     get(key: string): any {
         return this.map[key];
     }
 
-    /// Removes value for given key
+    /**
+     * Removes value for given key
+     *
+     * @param {string} key
+     * @returns {*}
+     * @memberof TGSession
+     */
     remove(key: string): any {
         return this.map.remove(key);
     }
 
-    /// Clear all
+    /**
+     * Clear all
+     *
+     * @memberof TGSession
+     */
     clear() {
         this.map.clear();
     }

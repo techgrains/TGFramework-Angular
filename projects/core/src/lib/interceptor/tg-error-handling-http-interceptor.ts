@@ -4,6 +4,23 @@ import { throwError as observableThrowError, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { TGError } from '../model';
 
+/**
+ * Intercepts and handles an `HttpResponse` for Error Handling.
+ *
+ * It is tranforming `HttpErrorResponse` into TGError
+ *
+ * In case of `Internet is not available`, It will generate custome `HttpErrorResponse`
+ *
+ * @example
+ *    new HttpErrorResponse({
+ *                        error: 'Internet is not available!',
+ *                        status: 510,
+ *    });
+ *
+ * @export
+ * @class TGErrorHandlingHttpInterceptor
+ * @implement {HttpInterceptor}
+ */
 @Injectable()
 export class TGErrorHandlingHttpInterceptor implements HttpInterceptor {
 
@@ -11,6 +28,13 @@ export class TGErrorHandlingHttpInterceptor implements HttpInterceptor {
     private tgError: TGError,
   ) { }
 
+  /**
+   * Identifies and handles a given HTTP request.
+   * @param req The outgoing request object to handle.
+   * @param next The next interceptor in the chain, or the backend
+   * if no interceptors remain in the chain.
+   * @returns An observable of the TGError stream.
+   */
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (!this.checkInternetConnection()) {
       const response = this.generateInternetNotAvaibleError();
@@ -30,6 +54,14 @@ export class TGErrorHandlingHttpInterceptor implements HttpInterceptor {
         }));
   }
 
+  /**
+   * Checking Internet connection
+   * It will return false if internet is not available else true
+   *
+   * @private
+   * @returns boolean
+   * @memberof TGErrorHandlingHttpInterceptor
+   */
   private checkInternetConnection() {
     if (!navigator.onLine) {
       return false;
@@ -37,6 +69,13 @@ export class TGErrorHandlingHttpInterceptor implements HttpInterceptor {
     return true;
   }
 
+  /**
+   * Generating HttpErrorResponse for Internet is not available
+   *
+   * @private
+   * @returns
+   * @memberof TGErrorHandlingHttpInterceptor
+   */
   private generateInternetNotAvaibleError() {
     return new HttpErrorResponse({
       error: 'Internet is not available!',

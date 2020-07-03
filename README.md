@@ -4,5 +4,5 @@ Purpose of TGFramework is to provide developer friendly library, that can help t
 # Installation
 
 ```
-npm i techgrains --save
+npm i @techgrains/core --save
 ```

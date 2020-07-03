@@ -3,6 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { TGConfig } from './tg-config.service';
 import { Observable } from 'rxjs';
 
+/**
+ * Wrapper class of `HttpClient`
+ *
+ * @export
+ * @class TGHttpClient
+ */
 @Injectable()
 export class TGHttpClient {
 
@@ -15,40 +21,133 @@ export class TGHttpClient {
         this.contextPath = this.tgConfig.baseAPI;
     }
 
-    public get(uri, options?): Observable<any> {
+    /**
+     * Constructs a `GET` request
+     * Base URL will be prepended from the baseAPI of TGConfig
+     *
+     * @param uri     The URI of API
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response
+     */
+    public get(uri: string, options?: any): Observable<any> {
         return this.httpClient.get(this.contextPath + uri, options);
     }
 
-    public getWithURIParams(uri, uriParams: string[], options?): Observable<any> {
-        return this.get({ api: this.generateURI(uri, uriParams) }, options);
+    /**
+     * Constructs a `GET` request
+     * Base URL will be prepended from the baseAPI of TGConfig
+     * It will replace '?' from `uri` in sequencing order with uriParams
+     *
+     * @param uri       The URI of API
+     * @param uriParams Array of any which is replacing `?` from URI
+     * @param options   The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response
+     */
+    public getWithURIParams(uri: string, uriParams: any[], options?): Observable<any> {
+        return this.get(this.generateURI(uri, uriParams), options);
     }
 
-    public post(uri, body: any, options?): Observable<any> {
+    /**
+     * Constructs a `POST` request
+     * Base URL will be prepended from the baseAPI of TGConfig
+     *
+     * @param uri       The URI of API
+     * @param body      Requested data
+     * @param options   The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response
+     */
+    public post(uri: string, body: any, options?: any): Observable<any> {
         return this.httpClient.post(this.contextPath + uri, body, options);
     }
 
-    public postWithURIParams(uri, uriParams: string[], body: any, options?): Observable<any> {
-        return this.post({ api: this.generateURI(uri, uriParams) }, body, options);
+    /**
+     * Constructs a `POST` request
+     * Base URL will be prepended from the baseAPI of TGConfig
+     * It will replace '?' from `uri` in sequencing order with uriParams
+     *
+     * @param uri       The URI of API
+     * @param uriParams Array of any which is replacing `?` from URI
+     * @param body      Requested data
+     * @param options   The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response
+     */
+    public postWithURIParams(uri: string, uriParams: any[], body: any, options?: any): Observable<any> {
+        return this.post(this.generateURI(uri, uriParams), body, options);
     }
 
-    public put(uri, body: any, options?): Observable<any> {
+    /**
+     * Constructs a `PUT` request
+     * Base URL will be prepended from the baseAPI of TGConfig
+     *
+     * @param uri       The URI of API
+     * @param body      Requested data
+     * @param options   The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response
+     */
+    public put(uri: string, body: any, options?: any): Observable<any> {
         return this.httpClient.put(this.contextPath + uri, body, options);
     }
 
-    public putWithURIParams(uri, uriParams: string[], body: any, options?): Observable<any> {
-        return this.put({ api: this.generateURI(uri, uriParams) }, body, options);
+    /**
+     * Constructs a `PUT` request
+     * Base URL will be prepended from the baseAPI of TGConfig
+     * It will replace '?' from `uri` in sequencing order with uriParams
+     *
+     * @param uri       The URI of API
+     * @param uriParams Array of any which is replacing `?` from URI
+     * @param body      Requested data
+     * @param options   The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response
+     */
+    public putWithURIParams(uri: string, uriParams: any[], body: any, options?: any): Observable<any> {
+        return this.put(this.generateURI(uri, uriParams), body, options);
     }
 
-    public delete(uri, options?): Observable<any> {
+    /**
+     * Constructs a `DELETE` request
+     * Base URL will be prepended from the baseAPI of TGConfig
+     *
+     * @param uri       The URI of API
+     * @param options   The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response
+     */
+    public delete(uri: string, options?: any): Observable<any> {
         return this.httpClient.delete(this.contextPath + uri, options);
     }
 
-    public deleteWithURIParams(uri, uriParams: string[], options?): Observable<any> {
-        return this.delete({ api: this.generateURI(uri, uriParams) }, options);
+    /**
+     * Constructs a `DELETE` request
+     * Base URL will be prepended from the baseAPI of TGConfig
+     * It will replace '?' from `uri` in sequencing order with uriParams
+     *
+     * @param uri       The URI of API
+     * @param uriParams Array of any which is replacing `?` from URI
+     * @param options   The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response
+     */
+    public deleteWithURIParams(uri: string, uriParams: any[], options?: any): Observable<any> {
+        return this.delete(this.generateURI(uri, uriParams), options);
     }
 
-    private generateURI(api, uriParams): string {
-        let uriTmp = api;
+    /**
+     * Replace '?' from `api` in sequencing order with uriParams
+     *
+     * @private
+     * @param {string} uri
+     * @param {any[]} uriParams
+     * @returns {string}
+     * @memberof TGHttpClient
+     */
+    private generateURI(uri: string, uriParams: any[]): string {
+        let uriTmp = uri;
         uriParams.forEach(param => {
             uriTmp = uriTmp.replace('?', param);
         });

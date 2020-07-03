@@ -5,6 +5,24 @@ import { tap, catchError } from 'rxjs/operators';
 import { TG_KEYS } from '../constant';
 import { TGLoaderService } from '../service';
 
+/**
+ * Intercepts and handles an `HttpRequest` and `HttpResponse` for Service Loader
+ *
+ * Intercepter using TGLoaderService service, it has two methods `start()` and `end()`
+ *
+ * Before every request, it will call `start()` method
+ *
+ * After every response, it will call `stop()` method
+ *
+ * In case of excluding loader, You can pass header with key `TG_KEYS.EXCLUDE_LOADER`.
+ *
+ * @example
+ *    const headers = new HttpHeaders().append(TG_KEYS.EXCLUDE_LOADER, true);
+ *
+ * @export
+ * @class TGLoaderHttpInterceptor
+ * @implement {HttpInterceptor}
+ */
 @Injectable()
 export class TGLoaderHttpInterceptor implements HttpInterceptor {
 
@@ -13,11 +31,9 @@ export class TGLoaderHttpInterceptor implements HttpInterceptor {
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    /** Check header - if loader exluded */
     const excludeLoader = request.headers.get(TG_KEYS.EXCLUDE_LOADER) ? true : false;
     if (!excludeLoader) {
-      // if (!(next instanceof HttpXhrBackend)) {
-
-      // }
       this.tgLoaderService.start();
     }
 
