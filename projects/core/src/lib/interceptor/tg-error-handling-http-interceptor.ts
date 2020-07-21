@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { throwError as observableThrowError, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { TGError } from '../model';
+import { isPlatformBrowser } from '@angular/common';
 
 /**
  * Intercepts and handles an `HttpResponse` for Error Handling.
@@ -26,6 +27,7 @@ export class TGErrorHandlingHttpInterceptor implements HttpInterceptor {
 
   constructor(
     private tgError: TGError,
+    @Inject(PLATFORM_ID) private platform: any,
   ) { }
 
   /**
@@ -63,8 +65,10 @@ export class TGErrorHandlingHttpInterceptor implements HttpInterceptor {
    * @memberof TGErrorHandlingHttpInterceptor
    */
   private checkInternetConnection() {
-    if (!navigator.onLine) {
-      return false;
+    if (isPlatformBrowser(this.platform)) {
+      if (navigator && !navigator.onLine) {
+        return false;
+      }
     }
     return true;
   }
