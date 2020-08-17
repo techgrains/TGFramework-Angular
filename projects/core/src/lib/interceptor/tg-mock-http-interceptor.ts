@@ -110,6 +110,17 @@ export class TGMockHttpInterceptor implements HttpInterceptor {
   private findMockMapping(request: HttpRequest<any>) {
     const reqUrl = request.url;
     const reqMethod = request.method;
-    return this.tgConfig.mockMapping.find(mock => `${this.tgConfig.baseAPI}${mock.uri}` === reqUrl && mock.method === reqMethod);
+    return this.tgConfig.mockMapping.find((mock) => {
+      if (mock.method !== reqMethod) {
+        return false;
+      }
+
+      if (`${this.tgConfig.baseAPI}${mock.uri}` === reqUrl
+        || (mock.uriRegex && reqUrl.match(mock.uriRegex))) {
+        return true;
+      }
+
+      return false;
+    });
   }
 }

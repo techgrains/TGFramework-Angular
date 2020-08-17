@@ -12,6 +12,11 @@ export interface TGMockMapping {
      */
     uri: string;
 
+    /**
+     * Regex URI, which is required to be mock
+     */
+    uriRegex?: any;
+
     /*
      * Real Service Method
      */
