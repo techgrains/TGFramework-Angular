@@ -18,6 +18,9 @@
     "paths": {
       "@techgrains/core": [
         "dist/@techgrains/core",
+      ],
+      "@angular/*": [
+        "./node_modules/@angular/*"
       ]
     }
   },
