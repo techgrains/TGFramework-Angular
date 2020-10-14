@@ -10,7 +10,7 @@ export class TGSession {
     private static instance: TGSession = null;
 
     /** Holds all key-values as Map */
-    private map;
+    private map: Map<string, object>;
 
     /** Gets TGSession's instance reference */
     public static getInstance(): TGSession {
@@ -32,7 +32,7 @@ export class TGSession {
      * @param {*} value
      */
     set(key: string, value: any): void {
-        this.map[key] = value;
+        this.map.set(key, value);
     }
 
     /**
@@ -43,7 +43,7 @@ export class TGSession {
      * @memberof TGSession
      */
     get(key: string): any {
-        return this.map[key];
+        return this.map.get(key);
     }
 
     /**
@@ -54,7 +54,7 @@ export class TGSession {
      * @memberof TGSession
      */
     remove(key: string): any {
-        return this.map.remove(key);
+        return this.map.delete(key);
     }
 
     /**
