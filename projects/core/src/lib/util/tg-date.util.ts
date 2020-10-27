@@ -1,4 +1,5 @@
-import * as moment from 'moment';
+import * as momentImported from 'moment';
+const moment = momentImported;
 
 /**
  * Date utility
