@@ -39,8 +39,8 @@ export class TGErrorHandlingHttpInterceptor implements HttpInterceptor {
    */
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (!this.checkInternetConnection()) {
-      const response = this.generateInternetNotAvaibleError();
-      return observableThrowError(response);
+      const serviceError = this.tgError.fromHttpErrorResponse(this.generateInternetNotAvaibleError());
+      return observableThrowError(serviceError);
     }
 
     return next
