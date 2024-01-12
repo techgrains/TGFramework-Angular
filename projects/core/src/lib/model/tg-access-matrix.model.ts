@@ -36,7 +36,7 @@ export class TGAccessMatrixVO {
             create: this.create,
             update: this.update,
             read: this.read,
-            delete: this.delete,
+            delete: this.delete
         };
     }
 }
