@@ -9,8 +9,8 @@ import { TGError } from './model';
 @NgModule({
   declarations: [],
   imports: [
-    HttpClientModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [
     TGLoaderService,
