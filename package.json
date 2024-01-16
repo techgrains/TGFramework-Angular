@@ -13,17 +13,17 @@
   },
   "dependencies": {
     "@angular-devkit/core": "^15.2.10",
-    "@angular/cli": "^15.2.10",
+    "@angular/cli": "^16.2.11",
     "cache": "^3.0.0",
     "clean": "^4.0.2",
     "moment": "^2.27.0",
     "webpack": "^5.76.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^15.2.10",
+    "@angular-devkit/build-angular": "^16.2.11",
     "@angular-devkit/build-ng-packagr": "0.1002.0",
     "@angular/animations": "^15.2.10",
-    "npm i @angular/common@15.2.10": "^15.2.10",
+    "@angular/common": "^15.2.10",
     "@angular/compiler": "^15.2.10",
     "@angular/compiler-cli": "^15.2.10",
     "@angular/core": "^15.2.10",
