@@ -45,7 +45,7 @@ export class TGHttpClient {
      *
      * @return An `Observable` of the response
      */
-    public getWithURIParams(uri: string, uriParams: any[], options?): Observable<any> {
+    public getWithURIParams(uri: string, uriParams: any[], options?: any): Observable<any> {
         return this.get(this.generateURI(uri, uriParams), options);
     }
 

@@ -14,7 +14,7 @@ export class TGConfig {
     public baseAPI = '';
 
     /** Error Class - Transformating service errors into this class */
-    public errorClass;
+    public errorClass: any;
 
     /**
      * Service Mocking flag

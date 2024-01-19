@@ -8,7 +8,7 @@ import { TGAccessMatrixVO } from '../model';
  */
 export class TGAccessMatrix {
   /** Singleton instance */
-  private static instance: TGAccessMatrix = null;
+  private static instance: TGAccessMatrix;
 
   /** Flag Types */
   static READ = 1;
@@ -17,12 +17,12 @@ export class TGAccessMatrix {
   static CREATE = 8;
 
   /** Holds all Access Matrix as List */
-  list: TGAccessMatrixVO[];
-  flags: Map<string, Map<number, boolean>>; // String: key~roleId, int: Flag Type, bool: flag
-  roleIds: number[];
+  list: TGAccessMatrixVO[] = [];
+  flags!: Map<string, Map<number, boolean>>; // String: key~roleId, int: Flag Type, bool: flag
+  roleIds: number[] = [];
 
   /** Created At timestamp */
-  private createdAt: Date;
+  private createdAt!: Date;
 
   /**
    * Gets TGAccessMatrix's instance reference
@@ -93,15 +93,21 @@ export class TGAccessMatrix {
     }
 
     let result = false;
-    checkRoles.forEach(roleId => {
+    // checkRoles.forEach(roleId => {
+    //   const mapKey = this.mapKey(key, roleId);
+    //   if (this.flags.has(mapKey)) {
+    //     if (this.flags.get(mapKey).get(flagType)) {
+    //       result = true;
+    //       return true;
+    //     }
+    //   }
+    // });
+
+    result = checkRoles.some(roleId => {
       const mapKey = this.mapKey(key, roleId);
-      if (this.flags.has(mapKey)) {
-        if (this.flags.get(mapKey).get(flagType)) {
-          result = true;
-          return true;
-        }
-      }
+      return this.flags.get(mapKey)?.get(flagType) ?? false;
     });
+    
     return result;
   }
 

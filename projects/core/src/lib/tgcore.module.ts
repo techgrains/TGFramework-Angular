@@ -1,10 +1,10 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { TGLoaderService } from './service/tg-loader.service';
-import { TGHttpClient } from './service/tg-http-client.service';
-import { TGConfig } from './service/tg-config.service';
+import { FormsModule } from '@angular/forms';
+import { TGLoaderService, TGHttpClient, TGConfig } from './service';
 import { TGError } from './model';
+
 
 @NgModule({
   declarations: [],
@@ -30,4 +30,4 @@ export class TGCoreModule {
       ]
     };
   }
-}
+ }

@@ -83,7 +83,7 @@ export class TGErrorHandlingHttpInterceptor implements HttpInterceptor {
   private generateInternetNotAvaibleError() {
     return new HttpErrorResponse({
       error: 'Internet is not available!',
-      status: 510,
+      status: 510
     });
   }
 }

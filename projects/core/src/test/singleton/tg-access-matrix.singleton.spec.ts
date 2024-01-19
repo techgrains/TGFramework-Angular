@@ -66,7 +66,7 @@ describe('TGAccessMatrix', () => {
   }));
 });
 
-function createMatrix(key, roleId, create, read, update, deletee): TGAccessMatrixVO {
+function createMatrix(key: string, roleId: number, create: boolean, read: boolean, update: boolean, deletee: boolean): TGAccessMatrixVO {
   const tgAccessMatrixVO: TGAccessMatrixVO = new TGAccessMatrixVO();
   tgAccessMatrixVO.key = key;
   tgAccessMatrixVO.roleId = roleId;

@@ -7,7 +7,7 @@
  */
 export class TGSession {
     /** Singleton instance */
-    private static instance: TGSession = null;
+    private static instance: TGSession;
 
     /** Holds all key-values as Map */
     private map: Map<string, object>;

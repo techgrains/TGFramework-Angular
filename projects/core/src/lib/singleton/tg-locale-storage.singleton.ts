@@ -7,7 +7,7 @@
  */
 export class TGLocalStoarage {
     /** Singleton instance */
-    private static instance: TGLocalStoarage = null;
+    private static instance: TGLocalStoarage;
 
     /** Gets TGLocalStoarage's instance reference */
     public static getInstance(): TGLocalStoarage {
@@ -27,7 +27,7 @@ export class TGLocalStoarage {
     }
 
     /** Gets value for given key */
-    private get(key: string): string | null {
+    private get(key: string): any {
         return localStorage.getItem(key);
     }
 
@@ -52,9 +52,10 @@ export class TGLocalStoarage {
      * @param {strings} key  Key of storage
      * @returns {number}    Return value
      */
-    getNumber(key: string): number {
+    getNumber(key: string): any {
         const value = this.get(key);
-        return this.isNull(value) ? null : Number(value);
+        return value === null || this.isNull(value) ? null : Number(value);
+
     }
 
     /**
@@ -75,7 +76,7 @@ export class TGLocalStoarage {
      */
     getString(key: string): string {
         const value = this.get(key);
-        return this.isNull(value) ? null : this.get(key);
+        return this.isNull(value) ? null : this.get(key)!;
     }
 
     /**
@@ -94,7 +95,7 @@ export class TGLocalStoarage {
      * @param {string} key  Key of storage
      * @returns {number}    Return value
      */
-    getBoolean(key: string): boolean {
+    getBoolean(key: string): any {
         const value = this.get(key);
         return this.isNull(value) ? null : value === 'true';
     }

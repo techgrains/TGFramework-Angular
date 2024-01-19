@@ -5,16 +5,16 @@
  * @class TGAccessMatrixVO
  */
 export class TGAccessMatrixVO {
-    key: string;
-    roleId: number;
-    module: string;
-    access: string;
-    create: boolean;
-    update: boolean;
-    read: boolean;
-    delete: boolean;
+    key!: string;
+    roleId!: number;
+    module!: string;
+    access!: string;
+    create!: boolean;
+    update!: boolean;
+    read!: boolean;
+    delete!: boolean;
 
-    static fromJson(json) {
+    static fromJson(json: any) {
         const vo: TGAccessMatrixVO = new TGAccessMatrixVO();
         vo.key = json.key;
         vo.roleId = json.roleId;

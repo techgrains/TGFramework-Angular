@@ -7,7 +7,7 @@
  */
 export class TGSessionStoarage {
     /** Singleton instance */
-    private static instance: TGSessionStoarage = null;
+    private static instance: TGSessionStoarage;
 
     /** Gets TGSessionStoarage's instance reference */
     public static getInstance(): TGSessionStoarage {
@@ -27,7 +27,7 @@ export class TGSessionStoarage {
     }
 
     /** Gets value for given key */
-    private get(key: string): string | null {
+    private get(key: string): any {
         return sessionStorage.getItem(key);
     }
 
@@ -54,7 +54,7 @@ export class TGSessionStoarage {
      */
     getNumber(key: string): number {
         const value = this.get(key);
-        return this.isNull(value) ? null : Number(value);
+        return this.isNull(value) ? 0 : Number(value);
     }
 
     /**
@@ -96,7 +96,7 @@ export class TGSessionStoarage {
      */
     getBoolean(key: string): boolean {
         const value = this.get(key);
-        return this.isNull(value) ? null : value === 'true';
+        return this.isNull(value) ? false : value === 'true';
     }
 
     /**

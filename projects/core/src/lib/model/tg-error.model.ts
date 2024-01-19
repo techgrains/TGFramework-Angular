@@ -7,7 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
  * @class TGError
  */
 export class TGError {
-    public fromJson(json) {
+    public fromJson(json: any) {
         return json;
     }
 
