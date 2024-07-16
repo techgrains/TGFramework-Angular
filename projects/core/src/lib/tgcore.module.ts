@@ -1,9 +1,8 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TGLoaderService, TGHttpClient, TGConfig } from './service';
 import { TGError } from './model';
+import { TGConfig, TGHttpClient, TGLoaderService } from './service';
 
 
 @NgModule({ declarations: [],

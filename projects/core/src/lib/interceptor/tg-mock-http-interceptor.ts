@@ -94,7 +94,7 @@ export class TGMockHttpInterceptor implements HttpInterceptor {
       error: httpResponse.body,
       headers: httpResponse.headers,
       status: httpResponse.body.httpStatus,
-      url: httpResponse.url
+      url: httpResponse.url ?? undefined
     });
   }
 
