@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpErrorResponse, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -21,9 +21,10 @@ import { TGMockMapping } from '../model';
 @Injectable()
 export class TGMockHttpInterceptor implements HttpInterceptor {
 
-  constructor(
-    private tgConfig: TGConfig
-  ) { }
+  private tgConfig = inject(TGConfig)
+
+  constructor() {
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (this.tgConfig.applyMock) {
@@ -110,7 +111,7 @@ export class TGMockHttpInterceptor implements HttpInterceptor {
   private findMockMapping(request: HttpRequest<any>) {
     const reqUrl = request.url;
     const reqMethod = request.method;
-    return this.tgConfig.mockMapping.find((mock) => {
+    return this.tgConfig.mockMapping.find((mock: any) => {
       if (mock.method !== reqMethod) {
         return false;
       }

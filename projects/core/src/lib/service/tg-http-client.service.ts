@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TGConfig } from './tg-config.service';
 import { Observable } from 'rxjs';
@@ -11,14 +11,14 @@ import { Observable } from 'rxjs';
  */
 @Injectable()
 export class TGHttpClient {
-
+    private tgConfig = inject(TGConfig)
+    private httpClient = inject(HttpClient)
     private contextPath: string;
 
     constructor(
-        private httpClient: HttpClient,
-        private tgConfig: TGConfig,
     ) {
         this.contextPath = this.tgConfig.baseAPI;
+        console.log('This message comes from tg http client method')
     }
 
     /**

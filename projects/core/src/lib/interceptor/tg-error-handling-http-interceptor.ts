@@ -1,4 +1,4 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID, inject } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { throwError as observableThrowError, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -24,11 +24,13 @@ import { isPlatformBrowser } from '@angular/common';
  */
 @Injectable()
 export class TGErrorHandlingHttpInterceptor implements HttpInterceptor {
-
+  private tgError = inject(TGError)
+  private platform = inject(PLATFORM_ID);
+  
   constructor(
-    private tgError: TGError,
-    @Inject(PLATFORM_ID) private platform: any,
-  ) { }
+  ) {
+
+   }
 
   /**
    * Identifies and handles a given HTTP request.
