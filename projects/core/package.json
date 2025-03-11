@@ -1,0 +1,13 @@
+{
+  "name": "@techgrains/core",
+  "version": "2.0.0",
+  "peerDependencies": {
+    "@angular/common": "^16.2.0",
+    "@angular/core": "^16.2.0"
+  },
+  "dependencies": {
+    "moment": "^2.30.1",
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}
