@@ -71,9 +71,9 @@ export class TGSessionStoarage {
      * Gets sting value for given key
      *
      * @param {string} key  Key of storage
-     * @returns {number}    Return value
+     * @returns {string | null}    Return value
      */
-    getString(key: string): string {
+    getString(key: string): string | null {
         const value = this.get(key);
         return this.isNull(value) ? null : this.get(key);
     }
@@ -113,9 +113,9 @@ export class TGSessionStoarage {
      * Gets object value for given key
      *
      * @param {string} key  Key of storage
-     * @returns {number}    Return value
+     * @returns {object | null}    Return value
      */
-    getObject(key: string): object {
+    getObject(key: string): object | null {
         const value = this.get(key);
         return this.isNull(value) ? null : JSON.parse(value);
     }
