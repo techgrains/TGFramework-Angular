@@ -23,7 +23,7 @@ export class TGHttpUtil {
     public static mergeHeaders(headersFrom: HttpHeaders, headersTo: HttpHeaders) {
         if (headersFrom) {
             headersFrom.keys().forEach((key) => {
-                headersTo = headersTo.append(key, headersFrom.get(key));
+                headersTo = headersTo.append(key, headersFrom.get(key) ?? '');
             });
         }
 

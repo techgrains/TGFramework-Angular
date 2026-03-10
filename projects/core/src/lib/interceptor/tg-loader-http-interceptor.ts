@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { throwError as observableThrowError, Observable } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
@@ -25,10 +25,10 @@ import { TGLoaderService } from '../service';
  */
 @Injectable()
 export class TGLoaderHttpInterceptor implements HttpInterceptor {
-
-  constructor(
-    private tgLoaderService: TGLoaderService,
-  ) { }
+  private tgLoaderService = inject(TGLoaderService)
+  constructor() {
+    
+   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     /** Check header - if loader exluded */
